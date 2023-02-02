@@ -66,7 +66,7 @@ local soraGravityPointer=ReadLong(0x1B2512)+0x138
 	elseif L2 == true and ReadByte(Cntrl) == 0 and ReadByte(Now+0) == 0x0A then
 	WriteFloat(ReadLong(SoraCurrentSpeed)+0x12C, 54, true)
 	WriteFloat(ReadLong(SoraCurrentSpeed)+0x128, 6, true)
-	elseif L2 == false and ReadByte(Cntrl) == 0 and ReadByte(Now+0) ~= 0x0A then
+	elseif L2 == false and ReadByte(Cntrl) == 0 and ReadByte(Now+0) ~= 0x0A or ReadByte(Slot1+0x1B0) == 0 and ReadByte(Slot1+0x1B1) == 0 then
 		if ReadByte(Save+0x3524) == 1 or ReadByte(Save+0x3524) == 2 then
 		WriteFloat(ReadLong(SoraCurrentSpeed)+0x12C, 12, true)
 		WriteFloat(ReadLong(SoraCurrentSpeed)+0x128, 2, true)
@@ -126,14 +126,17 @@ local soraGravityPointer=ReadLong(0x1B2512)+0x138
 			end
 		end
 		if _CurrAnimPointer == 1 or _CurrAnimPointer == 2 or _CurrAnimPointer == 201 or _CurrAnimPointer == 4 or _CurrAnimPointer == 202 or _CurrAnimPointer == 205 or _CurrAnimPointer == 206 or _CurrAnimPointer == 3 then
-		WriteFloat(animpointer, 3, true)
+			if ReadByte(Slot1+0x1B0) > 0 then
+			WriteFloat(animpointer, 3, true)
+			else WriteFloat(animpointer, 1, true)
+			end
 		else WriteFloat(animpointer, 1, true)
 		end
 		if ReadByte(Slot1+0x1B0) == 0 and ReadByte(Slot1+0x1B1) > 0 then
 		WriteByte(Slot1+0x1B0, 100)
 		WriteByte(Slot1+0x1B1, ReadByte(Slot1+0x1B1) - 1)
 		end
-	elseif L2 == false then
+	elseif L2 == false or ReadByte(Slot1+0x1B0) == 0 and ReadByte(Slot1+0x1B1) == 0 then
 	WriteFloat(soraGravityPointer, 16, true)
 	WriteFloat(soraJumpStrengthPointer, 185, true)
 	WriteFloat(0x250D332, 16) -- Glide 1 Speed (Default: 16)
