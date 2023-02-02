@@ -47,50 +47,53 @@ local L2 = ReadLong(0x2494573) > 500000 and ReadLong(0x2494573) < 900000
 local SoraCurrentSpeed = 0x00716A60-0x56454E
 local soraGravityPointer=ReadLong(0x1B2512)+0x138
 	if L2 == true and ReadByte(Now+0) ~= 0x0A and ReadByte(Cntrl) == 0 then
-		if ReadByte(Save+0x3524) == 0 and ReadByte(Slot1+0x1B0) > 0 then --If not in a form
-		WriteFloat(soraGravityPointer, 16 * 4, true)
-		WriteFloat(soraJumpStrengthPointer, 185 * 2.5, true)
-		WriteFloat(0x250D332, 16 * 2) -- Glide 1 Speed (Default: 16)
-		WriteFloat(0x250D376, 20 * 2) -- Glide 2 Speed (Default: 20)
-		WriteFloat(0x250D3BA, 24 * 2) -- Glide 3 Speed (Default: 24)
-		WriteFloat(0x250D3FE, 32 * 2) -- Glide MAX Speed (Default: 32)
-		WriteFloat(0x250D442, 64 * 2) -- Glide AX2 Speed (Default: 64)
-		WriteFloat(0x250D312, 235 * 2.5) -- Sora Base Jump Height
-		WriteFloat(0x250D356, 310 * 2.5) -- Sora High Jump 2
-		WriteFloat(0x250D39A, 385 * 2.5) -- Sora High Jump 3
-		WriteFloat(0x250D3DE, 585 * 2.5) -- Sora High Jump MAX
-		WriteFloat(0x250D422, 585 * 2.5) -- Sora High Jump AX2
-		WriteFloat(0x250D322, 30 * 3) -- QR1 Speed
-		WriteFloat(0x250D366, 34 * 3) -- QR2 Speed
-		WriteFloat(0x250D3AA, 38 * 3) -- QR3 Speed
-		WriteFloat(0x250D3EE, 38 * 3) -- QR4 Speed
-		WriteFloat(0x250D432, 38 * 3) -- QRAX2 Speed
-		WriteFloat(0x250D316, 145 * 3) -- AD1 Height
-		WriteFloat(0x250D31A, 18 * 1.5) -- AD1 Speed
-		WriteFloat(0x250D35A, 155 * 3) -- AD2 Height
-		WriteFloat(0x250D35E, 24 * 1.5) -- AD2 Speed
-		WriteFloat(0x250D39E, 200 * 3) -- AD3 Height
-		WriteFloat(0x250D3A2, 30 * 1.5) -- AD3 Speed
-		WriteFloat(0x250D3E2, 300 * 3) -- AD4 Height
-		WriteFloat(0x250D3E6, 36 * 1.5) -- AD4 Speed
-		WriteFloat(0x250D426, 1700 * 2) -- ADAX2 Height
-		WriteFloat(0x250D42A, 36 * 1.5) -- ADAX2 Speed
-			if _CurrAnimPointer == 1 or _CurrAnimPointer == 2 or _CurrAnimPointer == 201 or _CurrAnimPointer == 4 or _CurrAnimPointer == 202 or _CurrAnimPointer == 205 or _CurrAnimPointer == 206 or _CurrAnimPointer == 3 then
-			WriteFloat(animpointer, 3, true)
-			else WriteFloat(animpointer, 1, true)
-			end
-		WriteFloat(ReadLong(SoraCurrentSpeed)+0x12C, 24, true) -- Running Speed
-		WriteFloat(ReadLong(SoraCurrentSpeed)+0x128, 6, true) -- Walking Speed
-		Timer = Timer - 1
-			if Timer <= 0 then
-			WriteByte(Slot1+0x1B0, ReadByte(Slot1+0x1B0) - 1)
-			Timer = 5
-			end
-			if ReadByte(Slot1+0x1B0) == 0 and ReadByte(Slot1+0x1B1) > 0 then
-			WriteByte(Slot1+0x1B0, 100)
-			WriteByte(Slot1+0x1B1, ReadByte(Slot1+0x1B1) - 1)
+		if ReadByte(Save+0x3524) == 0 then --If not in a form
+			if ReadByte(Slot1+0x1B0) > 0 or ReadByte(Slot1+0x1B1) > 0 then
+			WriteFloat(soraGravityPointer, 16 * 4, true)
+			WriteFloat(soraJumpStrengthPointer, 185 * 2.5, true)
+			WriteFloat(0x250D332, 16 * 2) -- Glide 1 Speed (Default: 16)
+			WriteFloat(0x250D376, 20 * 2) -- Glide 2 Speed (Default: 20)
+			WriteFloat(0x250D3BA, 24 * 2) -- Glide 3 Speed (Default: 24)
+			WriteFloat(0x250D3FE, 32 * 2) -- Glide MAX Speed (Default: 32)
+			WriteFloat(0x250D442, 64 * 2) -- Glide AX2 Speed (Default: 64)
+			WriteFloat(0x250D312, 235 * 2.5) -- Sora Base Jump Height
+			WriteFloat(0x250D356, 310 * 2.5) -- Sora High Jump 2
+			WriteFloat(0x250D39A, 385 * 2.5) -- Sora High Jump 3
+			WriteFloat(0x250D3DE, 585 * 2.5) -- Sora High Jump MAX
+			WriteFloat(0x250D422, 585 * 2.5) -- Sora High Jump AX2
+			WriteFloat(0x250D322, 30 * 3) -- QR1 Speed
+			WriteFloat(0x250D366, 34 * 3) -- QR2 Speed
+			WriteFloat(0x250D3AA, 38 * 3) -- QR3 Speed
+			WriteFloat(0x250D3EE, 38 * 3) -- QR4 Speed
+			WriteFloat(0x250D432, 38 * 3) -- QRAX2 Speed
+			WriteFloat(0x250D316, 145 * 3) -- AD1 Height
+			WriteFloat(0x250D31A, 18 * 1.5) -- AD1 Speed
+			WriteFloat(0x250D35A, 155 * 3) -- AD2 Height
+			WriteFloat(0x250D35E, 24 * 1.5) -- AD2 Speed
+			WriteFloat(0x250D39E, 200 * 3) -- AD3 Height
+			WriteFloat(0x250D3A2, 30 * 1.5) -- AD3 Speed
+			WriteFloat(0x250D3E2, 300 * 3) -- AD4 Height
+			WriteFloat(0x250D3E6, 36 * 1.5) -- AD4 Speed
+			WriteFloat(0x250D426, 1700 * 2) -- ADAX2 Height
+			WriteFloat(0x250D42A, 36 * 1.5) -- ADAX2 Speed
+				if _CurrAnimPointer == 1 or _CurrAnimPointer == 2 or _CurrAnimPointer == 201 or _CurrAnimPointer == 4 or _CurrAnimPointer == 202 or _CurrAnimPointer == 205 or _CurrAnimPointer == 206 or _CurrAnimPointer == 3 then
+				WriteFloat(animpointer, 3, true)
+				else WriteFloat(animpointer, 1, true)
+				end
+			WriteFloat(ReadLong(SoraCurrentSpeed)+0x12C, 24, true) -- Running Speed
+			WriteFloat(ReadLong(SoraCurrentSpeed)+0x128, 6, true) -- Walking Speed
+			Timer = Timer - 1
+				if Timer <= 0 then
+				WriteByte(Slot1+0x1B0, ReadByte(Slot1+0x1B0) - 1)
+				Timer = 5
+				end
+				if ReadByte(Slot1+0x1B0) == 0 and ReadByte(Slot1+0x1B1) > 0 then
+				WriteByte(Slot1+0x1B0, 100)
+				WriteByte(Slot1+0x1B1, ReadByte(Slot1+0x1B1) - 1)
+				end
 			end
 		elseif ReadByte(Save+0x3524) ~= 0 then --If in a form
+		print(ReadByte(Save+0x3524))
 		WriteFloat(ReadLong(DriveDepleterPointer) + 0xE6C, 3, true)
 		WriteFloat(soraGravityPointer, 16 * 4, true)
 		WriteFloat(soraJumpStrengthPointer, 185 * 2.5, true)
