@@ -24,7 +24,7 @@ function _OnInit()
         Now = 0x0714DB8 - 0x56454E
         Save = 0x09A7070 - 0x56450E
         Obj0 = 0x2A22B90 - 0x56450E
-		Cntrl = 0x2A148A8 - 0x56450E
+	Cntrl = 0x2A148A8 - 0x56450E
         Sys3 = 0x2A59DB0 - 0x56450E
         Btl0 = 0x2A74840 - 0x56450E
         Slot1 = 0x2A20C58 - 0x56450E
@@ -91,6 +91,37 @@ local soraGravityPointer=ReadLong(0x1B2512)+0x138
 				WriteByte(Slot1+0x1B0, 100)
 				WriteByte(Slot1+0x1B1, ReadByte(Slot1+0x1B1) - 1)
 				end
+			else --If the gauge runs out while still holding L2, while not in a form
+			WriteFloat(soraGravityPointer, 16, true)
+			WriteFloat(soraJumpStrengthPointer, 185, true)
+			WriteFloat(animpointer, 1, true)
+			WriteFloat(0x250D332, 16) -- Glide 1 Speed (Default: 16)
+			WriteFloat(0x250D376, 20) -- Glide 2 Speed (Default: 20)
+			WriteFloat(0x250D3BA, 24) -- Glide 3 Speed (Default: 24)
+			WriteFloat(0x250D3FE, 32) -- Glide MAX Speed (Default: 32)
+			WriteFloat(0x250D442, 64) -- Glide AX2 Speed (Default: 64)
+			WriteFloat(0x250D312, 235) -- Sora Base Jump Height
+			WriteFloat(0x250D356, 310) -- Sora High Jump 2
+			WriteFloat(0x250D39A, 385) -- Sora High Jump 3
+			WriteFloat(0x250D3DE, 585) -- Sora High Jump MAX
+			WriteFloat(0x250D422, 585) -- Sora High Jump AX2
+			WriteFloat(0x250D322, 30) -- QR1 Speed
+			WriteFloat(0x250D366, 34) -- QR2 Speed
+			WriteFloat(0x250D3AA, 38) -- QR3 Speed
+			WriteFloat(0x250D3EE, 38) -- QR4 Speed
+			WriteFloat(0x250D432, 38) -- QRAX2 Speed
+			WriteFloat(0x250D316, 145) -- AD1 Height
+			WriteFloat(0x250D31A, 18) -- AD1 Speed
+			WriteFloat(0x250D35A, 155) -- AD2 Height
+			WriteFloat(0x250D35E, 24) -- AD2 Speed
+			WriteFloat(0x250D39E, 200) -- AD3 Height
+			WriteFloat(0x250D3A2, 30) -- AD3 Speed
+			WriteFloat(0x250D3E2, 300) -- AD4 Height
+			WriteFloat(0x250D3E6, 36) -- AD4 Speed
+			WriteFloat(0x250D426, 1700) -- ADAX2 Height
+			WriteFloat(0x250D42A, 36) -- ADAX2 Speed
+			WriteFloat(ReadLong(SoraCurrentSpeed)+0x12C, 8, true) -- Running Speed
+			WriteFloat(ReadLong(SoraCurrentSpeed)+0x128, 2, true) -- Walking Speed
 			end
 		elseif ReadByte(Save+0x3524) ~= 0 then --If in a form
 		print(ReadByte(Save+0x3524))
