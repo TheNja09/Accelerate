@@ -46,7 +46,7 @@ local soraJumpStrengthPointer=ReadLong(0x1B2512)+0x130
 local L2 = ReadLong(0x2494573) > 500000 and ReadLong(0x2494573) < 900000
 local SoraCurrentSpeed = 0x00716A60-0x56454E
 local soraGravityPointer=ReadLong(0x1B2512)+0x138
-	if L2 == true and ReadByte(Now+0) ~= 0x0A and ReadByte(Cntrl) == 0 then
+	if L2 == true and ReadByte(Cntrl) == 0 then
 		if ReadByte(Save+0x3524) == 0 then --If not in a form
 			if ReadByte(Slot1+0x1B0) > 0 or ReadByte(Slot1+0x1B1) > 0 then
 			WriteFloat(soraGravityPointer, 16 * 4, true)
@@ -80,8 +80,13 @@ local soraGravityPointer=ReadLong(0x1B2512)+0x138
 				WriteFloat(animpointer, 3, true)
 				else WriteFloat(animpointer, 1, true)
 				end
-			WriteFloat(ReadLong(SoraCurrentSpeed)+0x12C, 24, true) -- Running Speed
-			WriteFloat(ReadLong(SoraCurrentSpeed)+0x128, 6, true) -- Walking Speed
+				if ReadByte(Now+0) == 0x0A then
+				WriteFloat(ReadLong(SoraCurrentSpeed)+0x12C, 54, true) -- Running Speed
+				WriteFloat(ReadLong(SoraCurrentSpeed)+0x128, 6, true) -- Walking Speed
+				elseif ReadByte(Now+0) ~= 0x0A then
+				WriteFloat(ReadLong(SoraCurrentSpeed)+0x12C, 24, true) -- Running Speed
+				WriteFloat(ReadLong(SoraCurrentSpeed)+0x128, 6, true) -- Walking Speed
+				end
 			Timer = Timer - 1
 				if Timer <= 0 then
 				WriteByte(Slot1+0x1B0, ReadByte(Slot1+0x1B0) - 1)
@@ -201,10 +206,15 @@ local soraGravityPointer=ReadLong(0x1B2512)+0x138
 		WriteFloat(0x250D3E6, 36) -- AD4 Speed
 		WriteFloat(0x250D426, 1700) -- ADAX2 Height
 		WriteFloat(0x250D42A, 36) -- ADAX2 Speed
-		WriteFloat(ReadLong(SoraCurrentSpeed)+0x12C, 8, true) -- Running Speed
-		WriteFloat(ReadLong(SoraCurrentSpeed)+0x128, 2, true) -- Walking Speed
+			if ReadByte(Now+0) == 0x0A then
+			WriteFloat(ReadLong(SoraCurrentSpeed)+0x12C, 18, true) -- Running Speed
+			WriteFloat(ReadLong(SoraCurrentSpeed)+0x128, 2, true) -- Walking Speed
+			elseif ReadByte(Now+0) ~= 0x0A then
+			WriteFloat(ReadLong(SoraCurrentSpeed)+0x12C, 8, true) -- Running Speed
+			WriteFloat(ReadLong(SoraCurrentSpeed)+0x128, 2, true) -- Walking Speed
+			end
 		end
-	elseif L2 == false and ReadByte(Now+0) ~= 0x0A and ReadByte(Cntrl) == 0 then
+	elseif L2 == false and ReadByte(Cntrl) == 0 then
 		if ReadByte(Save+0x3524) == 0 then --If not in a form
 		WriteFloat(soraGravityPointer, 16, true)
 		WriteFloat(soraJumpStrengthPointer, 185, true)
@@ -234,8 +244,13 @@ local soraGravityPointer=ReadLong(0x1B2512)+0x138
 		WriteFloat(0x250D3E6, 36) -- AD4 Speed
 		WriteFloat(0x250D426, 1700) -- ADAX2 Height
 		WriteFloat(0x250D42A, 36) -- ADAX2 Speed
-		WriteFloat(ReadLong(SoraCurrentSpeed)+0x12C, 8, true) -- Running Speed
-		WriteFloat(ReadLong(SoraCurrentSpeed)+0x128, 2, true) -- Walking Speed
+			if ReadByte(Now+0) == 0x0A then
+			WriteFloat(ReadLong(SoraCurrentSpeed)+0x12C, 18, true) -- Running Speed
+			WriteFloat(ReadLong(SoraCurrentSpeed)+0x128, 2, true) -- Walking Speed
+			elseif ReadByte(Now+0) ~= 0x0A then
+			WriteFloat(ReadLong(SoraCurrentSpeed)+0x12C, 8, true) -- Running Speed
+			WriteFloat(ReadLong(SoraCurrentSpeed)+0x128, 2, true) -- Walking Speed
+			end
 		elseif ReadByte(Save+0x3524) ~= 0 then --If in a form
 		WriteFloat(ReadLong(DriveDepleterPointer) + 0xE6C, 1, true)
 		WriteFloat(soraGravityPointer, 16, true)
