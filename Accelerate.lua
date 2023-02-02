@@ -124,7 +124,6 @@ local soraGravityPointer=ReadLong(0x1B2512)+0x138
 			WriteFloat(ReadLong(SoraCurrentSpeed)+0x128, 2, true) -- Walking Speed
 			end
 		elseif ReadByte(Save+0x3524) ~= 0 then --If in a form
-		print(ReadByte(Save+0x3524))
 		WriteFloat(ReadLong(DriveDepleterPointer) + 0xE6C, 3, true)
 		WriteFloat(soraGravityPointer, 16 * 4, true)
 		WriteFloat(soraJumpStrengthPointer, 185 * 2.5, true)
