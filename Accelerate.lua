@@ -61,11 +61,11 @@ local soraGravityPointer=ReadLong(0x1B2512)+0x138
 			WriteFloat(0x250D39A, 385 * 2.5) -- Sora High Jump 3
 			WriteFloat(0x250D3DE, 585 * 2.5) -- Sora High Jump MAX
 			WriteFloat(0x250D422, 585 * 2.5) -- Sora High Jump AX2
-			WriteFloat(0x250D322, 30 * 3) -- QR1 Speed
-			WriteFloat(0x250D366, 34 * 3) -- QR2 Speed
-			WriteFloat(0x250D3AA, 38 * 3) -- QR3 Speed
-			WriteFloat(0x250D3EE, 38 * 3) -- QR4 Speed
-			WriteFloat(0x250D432, 38 * 3) -- QRAX2 Speed
+			WriteFloat(0x250D322, 30 * 2.125) -- QR1 Speed
+			WriteFloat(0x250D366, 34 * 2.125) -- QR2 Speed
+			WriteFloat(0x250D3AA, 38 * 2.125) -- QR3 Speed
+			WriteFloat(0x250D3EE, 38 * 2.125) -- QR4 Speed
+			WriteFloat(0x250D432, 38 * 2.125) -- QRAX2 Speed
 			WriteFloat(0x250D316, 145 * 3) -- AD1 Height
 			WriteFloat(0x250D31A, 18 * 1.5) -- AD1 Speed
 			WriteFloat(0x250D35A, 155 * 3) -- AD2 Height
@@ -137,11 +137,11 @@ local soraGravityPointer=ReadLong(0x1B2512)+0x138
 		WriteFloat(0x250D39A, 385 * 2.5) -- Sora High Jump 3
 		WriteFloat(0x250D3DE, 585 * 2.5) -- Sora High Jump MAX
 		WriteFloat(0x250D422, 585 * 2.5) -- Sora High Jump AX2
-		WriteFloat(0x250D322, 30 * 3) -- QR1 Speed
-		WriteFloat(0x250D366, 34 * 3) -- QR2 Speed
-		WriteFloat(0x250D3AA, 38 * 3) -- QR3 Speed
-		WriteFloat(0x250D3EE, 38 * 3) -- QR4 Speed
-		WriteFloat(0x250D432, 38 * 3) -- QRAX2 Speed
+		WriteFloat(0x250D322, 30 * 2.125) -- QR1 Speed
+		WriteFloat(0x250D366, 34 * 2.125) -- QR2 Speed
+		WriteFloat(0x250D3AA, 38 * 2.125) -- QR3 Speed
+		WriteFloat(0x250D3EE, 38 * 2.125) -- QR4 Speed
+		WriteFloat(0x250D432, 38 * 2.125) -- QRAX2 Speed
 		WriteFloat(0x250D316, 145 * 3) -- AD1 Height
 		WriteFloat(0x250D31A, 18 * 1.5) -- AD1 Speed
 		WriteFloat(0x250D35A, 155 * 3) -- AD2 Height
