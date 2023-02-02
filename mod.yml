@@ -1,0 +1,8 @@
+title: Accelerate
+description: While holding L2, all of Sora's movement abilities become amplified at the cost of your drive meter. Animation speed is also multiplied, but only for movement-related animations.
+assets:
+#Lua Scripts
+- name: scripts/Accelerate.lua
+  method: copy
+  source:
+  - name: Accelerate.lua
