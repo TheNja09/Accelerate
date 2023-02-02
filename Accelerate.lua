@@ -121,9 +121,10 @@ local soraGravityPointer=ReadLong(0x1B2512)+0x138
 			if ReadByte(Slot1+0x1B0) > 0 and ReadByte(Save+0x3524) == 0 then
 			WriteByte(Slot1+0x1B0, ReadByte(Slot1+0x1B0) - 1)
 			Timer = 5
-			elseif ReadByte(Slot1+0x1B0) > 0 and ReadByte(Slot1+0x1B1) > 0 and ReadByte(Save+0x3524) ~= 0 then
-			WriteFloat(ReadLong(DriveDepleterPointer) + 0xE6C, 3, true)
 			end
+		end
+		if ReadByte(Save+0x3524) ~= 0 then
+		WriteFloat(ReadLong(DriveDepleterPointer) + 0xE6C, 3, true)
 		end
 		if _CurrAnimPointer == 1 or _CurrAnimPointer == 2 or _CurrAnimPointer == 201 or _CurrAnimPointer == 4 or _CurrAnimPointer == 202 or _CurrAnimPointer == 205 or _CurrAnimPointer == 206 or _CurrAnimPointer == 3 then
 			if ReadByte(Slot1+0x1B0) > 0 then
