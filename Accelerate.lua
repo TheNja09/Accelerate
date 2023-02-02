@@ -47,7 +47,7 @@ local L2 = ReadLong(0x2494573) > 500000 and ReadLong(0x2494573) < 900000
 local SoraCurrentSpeed = 0x00716A60-0x56454E
 local soraGravityPointer=ReadLong(0x1B2512)+0x138
 	if L2 == true and ReadByte(Now+0) ~= 0x0A and ReadByte(Cntrl) == 0 then
-		if ReadByte(Save+0x3524) == 0 and ReadByte(Slot1+0x1B0) > 0 and ReadByte(Slot1+0x1B1) > 0 then --If not in a form
+		if ReadByte(Save+0x3524) == 0 and ReadByte(Slot1+0x1B0) > 0 then --If not in a form
 		WriteFloat(soraGravityPointer, 16 * 4, true)
 		WriteFloat(soraJumpStrengthPointer, 185 * 2.5, true)
 		WriteFloat(0x250D332, 16 * 2) -- Glide 1 Speed (Default: 16)
