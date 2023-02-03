@@ -1,4 +1,4 @@
-Timer = 5
+Timer = 7
 function _OnFrame()
     World = ReadByte(Now + 0x00)
     Room = ReadByte(Now + 0x01)
@@ -90,7 +90,7 @@ local soraGravityPointer=ReadLong(0x1B2512)+0x138
 			Timer = Timer - 1
 				if Timer <= 0 then
 				WriteByte(Slot1+0x1B0, ReadByte(Slot1+0x1B0) - 1)
-				Timer = 5
+				Timer = 7
 				end
 				if ReadByte(Slot1+0x1B0) == 0 and ReadByte(Slot1+0x1B1) > 0 then
 				WriteByte(Slot1+0x1B0, 100)
@@ -129,7 +129,7 @@ local soraGravityPointer=ReadLong(0x1B2512)+0x138
 			WriteFloat(ReadLong(SoraCurrentSpeed)+0x128, 2, true) -- Walking Speed
 			end
 		elseif ReadByte(Save+0x3524) ~= 0 then --If in a form
-		WriteFloat(ReadLong(DriveDepleterPointer) + 0xE6C, 3, true)
+		WriteFloat(ReadLong(DriveDepleterPointer) + 0xE6C, 4, true)
 		WriteFloat(soraGravityPointer, 16 * 4, true)
 		WriteFloat(soraJumpStrengthPointer, 185 * 2.5, true)
 		WriteFloat(0x250D332, 16 * 2) -- Glide 1 Speed (Default: 16)
