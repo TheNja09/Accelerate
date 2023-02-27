@@ -49,7 +49,7 @@ local soraJumpStrengthPointer=ReadLong(0x1B2512)+0x130
 local L2 = ReadLong(0x2494573) > 500000 and ReadLong(0x2494573) < 900000
 local SoraCurrentSpeed = 0x00716A60-0x56454E
 local soraGravityPointer=ReadLong(0x1B2512)+0x138
-	if L2 == true and ReadByte(Cntrl) == 0 then
+	if L2 == true and ReadByte(Cntrl) == 0 and ReadByte(0x2A0E7D0 - 0x56454E) ~= 2 then
 		if ReadByte(Save+0x3524) == 0 then --If not in a form
 			if ReadByte(Slot1+0x1B0) > 0 or ReadByte(Slot1+0x1B1) > 0 then
 			WriteFloat(soraGravityPointer, 16 * 4, true)
@@ -61,9 +61,14 @@ local soraGravityPointer=ReadLong(0x1B2512)+0x138
 			WriteFloat(0x250D442, 64 * 2) -- Glide AX2 Speed (Default: 64)
 			WriteFloat(0x250D312, 235 * 2.5) -- Sora Base Jump Height
 			WriteFloat(0x250D356, 310 * 2.5) -- Sora High Jump 2
+			if ReadShort(Now+0) ~= 0x1C12 and ReadShort(Now+0) ~= 0x2202 then
 			WriteFloat(animpointer, 2, true)
 			WriteFloat(MainKeyAnimSpeedPointer, 2, true)
 			WriteFloat(SecondKeyAnimSpeedPointer, 2, true)
+				if ReadByte(Save+0x3524) == 1 then
+				WriteFloat(ValorKey1AnimSpeedPointer, 2, true)
+				end
+			end
 			WriteFloat(0x250D39A, 385 * 2.5) -- Sora High Jump 3
 			WriteFloat(0x250D3DE, 585 * 2.5) -- Sora High Jump MAX
 			WriteFloat(0x250D422, 585 * 2.5) -- Sora High Jump AX2
@@ -132,7 +137,7 @@ local soraGravityPointer=ReadLong(0x1B2512)+0x138
 			WriteFloat(ReadLong(SoraCurrentSpeed)+0x12C, 8, true) -- Running Speed
 			WriteFloat(ReadLong(SoraCurrentSpeed)+0x128, 2, true) -- Walking Speed
 			end
-		elseif ReadByte(Save+0x3524) ~= 0 then --If in a form
+		elseif ReadByte(Save+0x3524) ~= 0 and ReadByte(0x2A0E7D0 - 0x56454E) ~= 2 then --If in a form
 		WriteFloat(ReadLong(DriveDepleterPointer) + 0xE6C, 4, true)
 		WriteFloat(soraGravityPointer, 16 * 4, true)
 			if ReadByte(Save+0x3524) == 1 or ReadByte(Save+0x3524) == 4 then
@@ -140,11 +145,13 @@ local soraGravityPointer=ReadLong(0x1B2512)+0x138
 			elseif ReadByte(Save+0x3524) == 5 then
 			WriteFloat(soraJumpStrengthPointer, 585 * 2.5, true)
 			end
-		WriteFloat(animpointer, 2, true)
-		WriteFloat(MainKeyAnimSpeedPointer, 2, true)
-		WriteFloat(SecondKeyAnimSpeedPointer, 2, true)
-			if ReadByte(Save+0x3524) == 1 then
-			WriteFloat(ValorKey1AnimSpeedPointer, 2, true)
+			if ReadShort(Now+0) ~= 0x1C12 and ReadShort(Now+0) ~= 0x2202 then
+			WriteFloat(animpointer, 2, true)
+			WriteFloat(MainKeyAnimSpeedPointer, 2, true)
+			WriteFloat(SecondKeyAnimSpeedPointer, 2, true)
+				if ReadByte(Save+0x3524) == 1 then
+				WriteFloat(ValorKey1AnimSpeedPointer, 2, true)
+				end
 			end
 		WriteFloat(0x250D332, 16 * 2) -- Glide 1 Speed (Default: 16)
 		WriteFloat(0x250D376, 20 * 2) -- Glide 2 Speed (Default: 20)
@@ -187,7 +194,7 @@ local soraGravityPointer=ReadLong(0x1B2512)+0x138
 			WriteFloat(ReadLong(SoraCurrentSpeed)+0x12C, 24, true) -- Running Speed
 			WriteFloat(ReadLong(SoraCurrentSpeed)+0x128, 6, true) -- Walking Speed
 			end
-		else --If the gauge runs out while still holding L2, while not in a form
+		elseif ReadByte(0x2A0E7D0 - 0x56454E) ~= 2 then --If the gauge runs out while still holding L2, while not in a form
 		WriteFloat(soraGravityPointer, 16, true)
 		WriteFloat(soraJumpStrengthPointer, 185, true)
 		WriteFloat(animpointer, 1, true)
@@ -226,15 +233,10 @@ local soraGravityPointer=ReadLong(0x1B2512)+0x138
 			WriteFloat(ReadLong(SoraCurrentSpeed)+0x128, 2, true) -- Walking Speed
 			end
 		end
-	elseif L2 == false and ReadByte(Cntrl) == 0 then
+	elseif L2 == false and ReadByte(Cntrl) == 0 and ReadByte(0x2A0E7D0 - 0x56454E) ~= 2 then
 		if ReadByte(Save+0x3524) == 0 then --If not in a form
 		WriteFloat(soraGravityPointer, 16, true)
-			if ReadByte(Save+0x3524) == 1 or ReadByte(Save+0x3524) == 4 then
-			WriteFloat(soraJumpStrengthPointer, 185 + 100, true)
-			elseif ReadByte(Save+0x3524) == 5 then
-			WriteFloat(soraJumpStrengthPointer, 185 + 400, true)
-			end
-		WriteFloat(animpointer, 2, true)
+		WriteFloat(soraJumpStrengthPointer, 185, true)
 		WriteFloat(MainKeyAnimSpeedPointer, 1, true)
 		WriteFloat(SecondKeyAnimSpeedPointer, 1, true)
 		WriteFloat(animpointer, 1, true)
@@ -273,7 +275,11 @@ local soraGravityPointer=ReadLong(0x1B2512)+0x138
 		elseif ReadByte(Save+0x3524) ~= 0 then --If in a form
 		WriteFloat(ReadLong(DriveDepleterPointer) + 0xE6C, 1, true)
 		WriteFloat(soraGravityPointer, 16, true)
-		WriteFloat(soraJumpStrengthPointer, 185, true)
+			if ReadByte(Save+0x3524) == 1 or ReadByte(Save+0x3524) == 4 then
+			WriteFloat(soraJumpStrengthPointer, 185 + 100, true)
+			elseif ReadByte(Save+0x3524) == 5 then
+			WriteFloat(soraJumpStrengthPointer, 185 + 400, true)
+			end
 		WriteFloat(animpointer, 1, true)
 		WriteFloat(MainKeyAnimSpeedPointer, 1, true)
 		WriteFloat(SecondKeyAnimSpeedPointer, 1, true)
@@ -321,6 +327,15 @@ local soraGravityPointer=ReadLong(0x1B2512)+0x138
 			WriteFloat(ReadLong(SoraCurrentSpeed)+0x12C, 8, true) -- Running Speed
 			WriteFloat(ReadLong(SoraCurrentSpeed)+0x128, 2, true) -- Walking Speed
 			end
+		end
+	end
+	if ReadByte(0x2A0E7D0 - 0x56454E) == 2 then
+	WriteFloat(MainKeyAnimSpeedPointer, 1, true)
+	WriteFloat(SecondKeyAnimSpeedPointer, 1, true)
+	WriteFloat(ReadLong(DriveDepleterPointer) + 0xE6C, 1, true)
+	WriteFloat(animpointer, 1, true)
+		if ReadByte(Save+0x3524) == 1 then
+		WriteFloat(ValorKey1AnimSpeedPointer, 1, true)
 		end
 	end
 end
