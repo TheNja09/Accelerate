@@ -64,7 +64,6 @@ local soraGravityPointer=ReadLong(0x1B2512)+0x138
 			if ReadShort(Now+0) ~= 0x1C12 and ReadShort(Now+0) ~= 0x2202 then
 			WriteFloat(animpointer, 2, true)
 			WriteFloat(MainKeyAnimSpeedPointer, 2, true)
-			WriteFloat(SecondKeyAnimSpeedPointer, 2, true)
 			end
 			WriteFloat(0x250D39A, 385 * 2.5) -- Sora High Jump 3
 			WriteFloat(0x250D3DE, 585 * 2.5) -- Sora High Jump MAX
@@ -105,7 +104,6 @@ local soraGravityPointer=ReadLong(0x1B2512)+0x138
 			WriteFloat(soraJumpStrengthPointer, 185, true)
 			WriteFloat(animpointer, 1, true)
 			WriteFloat(MainKeyAnimSpeedPointer, 1, true)
-			WriteFloat(SecondKeyAnimSpeedPointer, 1, true)
 			WriteFloat(0x250D332, 16) -- Glide 1 Speed (Default: 16)
 			WriteFloat(0x250D376, 20) -- Glide 2 Speed (Default: 20)
 			WriteFloat(0x250D3BA, 24) -- Glide 3 Speed (Default: 24)
@@ -194,7 +192,6 @@ local soraGravityPointer=ReadLong(0x1B2512)+0x138
 		WriteFloat(soraJumpStrengthPointer, 185, true)
 		WriteFloat(animpointer, 1, true)
 		WriteFloat(MainKeyAnimSpeedPointer, 1, true)
-		WriteFloat(SecondKeyAnimSpeedPointer, 1, true)
 		WriteFloat(0x250D332, 16) -- Glide 1 Speed (Default: 16)
 		WriteFloat(0x250D376, 20) -- Glide 2 Speed (Default: 20)
 		WriteFloat(0x250D3BA, 24) -- Glide 3 Speed (Default: 24)
@@ -233,7 +230,6 @@ local soraGravityPointer=ReadLong(0x1B2512)+0x138
 		WriteFloat(soraGravityPointer, 16, true)
 		WriteFloat(soraJumpStrengthPointer, 185, true)
 		WriteFloat(MainKeyAnimSpeedPointer, 1, true)
-		WriteFloat(SecondKeyAnimSpeedPointer, 1, true)
 		WriteFloat(animpointer, 1, true)
 		WriteFloat(0x250D332, 16) -- Glide 1 Speed (Default: 16)
 		WriteFloat(0x250D376, 20) -- Glide 2 Speed (Default: 20)
