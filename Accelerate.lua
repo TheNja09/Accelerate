@@ -336,13 +336,10 @@ local soraGravityPointer=ReadLong(0x1B2512)+0x138
 	end
 	if ReadByte(0x2A0E7D0 - 0x56454E) == 2 then
 	WriteFloat(MainKeyAnimSpeedPointer, 1, true)
+	WriteFloat(animpointer, 1, true)
 		if ReadByte(Save+0x3524) ~= 0 then
 		WriteFloat(SecondKeyAnimSpeedPointer, 1, true)
 		WriteFloat(ReadLong(DriveDepleterPointer) + 0xE6C, 1, true)
-		WriteFloat(ValorKey1AnimSpeedPointer, 1, true)
-		end
-	WriteFloat(animpointer, 1, true)
-		if ReadByte(Save+0x3524) ~= 0 then
 		WriteFloat(ValorKey1AnimSpeedPointer, 1, true)
 		end
 	end
